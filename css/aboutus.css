@@ -1,0 +1,98 @@
+
+/*----------------styling myteam div-----------------------*/
+/* Style the container/contact section */
+.myteam {
+  border-radius: 15px;
+  padding: 15px;
+margin-top:50px;
+}
+/* making blur this div background*/
+.myteam {
+  border:solid ;
+  padding:6vw ;
+  position:relative;
+}
+.myteam:before{
+  border-radius: 7px;
+  content:'';
+  position:absolute;
+  z-index:-1;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
+  background:url(bg5.jpg) fixed center;
+  filter:blur(7px);
+  background-size:100vw auto;
+  /* makup ? */
+  box-shadow:inset 0 0 0 50vw rgba(255,255,255,0.2)
+}
+/*-----------------------------styling all inner divs-----------------------------------*/
+/* Style the container/contact section */
+.container12 {
+  border-radius: 15px;
+  padding: 10px;
+
+}
+/* making blur this div background*/
+.container12 {
+  border:solid ;
+  padding:6vw ;
+  position:relative;
+}
+.container12:before{
+  border-radius: 7px;
+  content:'';
+  position:absolute;
+  z-index:-1;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
+  background:url(img4.jpg) fixed center;
+  filter:blur(7px);
+  background-size:100vw auto;
+  /* makup ? */
+  box-shadow:inset 0 0 0 50vw rgba(255,255,255,0.2)
+}
+/* Create two columns that float next to eachother */
+.column12 {
+  float: left;
+  width: 50%;
+  margin-top: 6px;
+  padding: 20px;
+}
+/* Clear floats after the columns */
+.row12:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack
+ on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column12, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+
+/*----------------medicin table style-------------*/
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  border-radius: 7px;
+  margin-left:20px;
+margin: 30px;
+border: 2px solid red;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: center-left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: silver;
+}

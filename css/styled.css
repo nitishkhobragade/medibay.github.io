@@ -1,0 +1,1364 @@
+/* =============================================
+ *
+ *   FIXED RESPONSIVE NAV
+ *
+ *   (c) 2014 @adtileHQ
+ *   http://www.adtile.me
+ *   http://twitter.com/adtilehq
+ *
+ *   Free to use under the MIT License.
+ *
+ * ============================================= */
+body, div,
+h1, h2, h3, h4, h5, h6,
+p, blockquote, pre, dl, dt, dd, ol, ul, li, hr,
+fieldset, form, label, legend, th, td,
+article, aside, figure, footer, header, hgroup, menu, nav, section,
+summary, hgroup {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+a:active,
+a:hover {
+  outline: 0;
+}
+@-webkit-viewport { width: device-width; }
+@-moz-viewport { width: device-width; }
+@-ms-viewport { width: device-width; }
+@-o-viewport { width: device-width; }
+@viewport { width: device-width; }
+/* ------------------------------------------
+  RESPONSIVE NAV STYLES
+--------------------------------------------- */
+.nav-collapse ul {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: block;
+  list-style: none;
+}
+.nav-collapse li {
+  width: 100%;
+  display: block;
+}
+.js .nav-collapse {
+  clip: rect(0 0 0 0);
+  max-height: 0;
+  position: absolute;
+  display: block;
+  overflow: hidden;
+  zoom: 1;
+}
+.nav-collapse.opened {
+  max-height: 9999px;
+}
+.disable-pointer-events {
+  pointer-events: none !important;
+}
+.nav-toggle {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+@media screen and (min-width: 60em) {
+  .js .nav-collapse {
+    position: relative;
+  }
+  .js .nav-collapse.closed {
+    max-height: none;
+  }
+  .nav-toggle {
+    display: none;
+  }
+}
+/* ------------------------------------------
+  DEMO STYLES
+--------------------------------------------- */
+body {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  color: #37302a;
+
+  font: normal 100%/1.4 sans-serif;
+}
+
+/* ------------------------------------------
+  FIXED HEADER
+--------------------------------------------- */
+header {
+  background: teal;
+  position: fixed;
+  z-index: 3;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+.logo {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  text-decoration: none;
+  font-weight: bold;
+  line-height: 55px;
+  padding: 0 20px;
+  color: #fff;
+  float: left;
+}
+/* ------------------------------------------
+  MASK
+--------------------------------------------- */
+.mask {
+  -webkit-transition: opacity 300ms;
+  -moz-transition: opacity 300ms;
+  transition: opacity 300ms;
+  background: rgba(0,0,0, .5);
+  visibility: hidden;
+  position: fixed;
+  opacity: 0;
+  z-index: 2;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
+}
+.android .mask {
+  -webkit-transition: none;
+  transition: none;
+}
+.js-nav-active .mask {
+  visibility: visible;
+  opacity: 1;
+}
+@media screen and (min-width: 40em) {
+  .mask {
+    display: none !important;
+    opacity: 0 !important;
+  }
+}
+/* ------------------------------------------
+  NAVIGATION STYLES
+--------------------------------------------- */
+.fixed {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+.nav-collapse,
+.nav-collapse * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.nav-collapse,
+.nav-collapse ul {
+  list-style: none;
+  width: 100%;
+  float: left;
+}
+@media screen and (min-width: 60em) {
+  .nav-collapse {
+    float: right;
+    width: auto;
+  }
+}
+.nav-collapse li {
+  float: left;
+  width: 100%;
+}
+@media screen and (min-width: 60em) {
+  .nav-collapse li {
+    width: auto;
+  }
+}
+.nav-collapse a {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  border-top: 1px solid white;
+  text-decoration: none;
+  background: teal;
+  padding: 0.7em 1em;
+  color: #fff;
+  width: 100%;
+  float: left;
+}
+.nav-collapse a:active,
+.nav-collapse .active a {
+  background: brown;
+}
+.nav-collapse a:hover,
+.nav-collapse .hover a {
+  background: brown;
+}
+@media screen and (min-width: 40em) {
+  .nav-collapse a {
+    border-left: 1px solid white;
+    padding: 1.02em 2em;
+    text-align: center;
+    border-top: 0;
+    float: left;
+    margin: 0;
+  }
+}
+.nav-collapse ul ul a {
+  background: #ca3716;
+  padding-left: 2em;
+}
+@media screen and (min-width: 40em) {
+  .nav-collapse ul ul a {
+    display: none;
+  }
+}
+/* ------------------------------------------
+  NAV TOGGLE STYLES
+--------------------------------------------- */
+@font-face {
+  font-family: "responsivenav";
+  src:url("../icons/responsivenav.eot");
+  src:url("../icons/responsivenav.eot?#iefix") format("embedded-opentype"),
+    url("../icons/responsivenav.ttf") format("truetype"),
+    url("../icons/responsivenav.woff") format("woff"),
+    url("../icons/responsivenav.svg#responsivenav") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+.nav-toggle {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-decoration: none;
+  text-indent: -300px;
+  position: relative;
+  overflow: hidden;
+  width: 60px;
+  height: 55px;
+  float: right;
+}
+.nav-toggle:before {
+  color: #fff; /* Edit this to change the icon color */
+  font: normal 28px/55px "responsivenav"; /* Edit font-size (28px) to change the icon size */
+  text-transform: none;
+  text-align: center;
+  position: absolute;
+  content: "\2261"; /* Hamburger icon */
+  text-indent: 0;
+  speak: none;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+.nav-toggle.active:before {
+  font-size: 24px;
+  content: "\78"; /* Close icon */
+}
+/*----original css files--------*/
+*
+{
+   padding: 0;
+   margin: 0;
+   box-sizing: border-box;
+}
+body{
+  margin: 0;
+  padding: 0;
+  background-image: url(bg19.jpg);
+  /**/
+  background-size: cover;
+  background-position: center;
+  /**/
+  font-family: sans-serif;
+  background-repeat: repeat-x;
+}
+.topnav {
+  overflow: hidden;
+  background-color: teal;
+  position: fixed;
+  width: 100%;
+  z-index: 1; /*integer */
+  margin-left: 10px;
+  margin-right: 20px; 
+}
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 18px; 
+}
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+.topnav a.active {
+  background-color: gold;
+  color: white;
+}
+.topnav .icon {
+  display: none;
+}
+@media screen and (max-width: 900px) {
+  .topnav{
+    z-index: 1;
+  }
+  .topnav a:not(:first-child) {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+@media screen and (max-width: 900px) {
+  .topnav{
+    z-index: 1;
+  }
+  .topnav.responsive {position: fixed;}
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}
+
+/*------------------Slideshow container--------------------*/
+/*---------slideshow-------*/
+.myslides {
+  display: none;
+}
+img{
+  vertical-align: middle;
+}
+/*slideshow-container*/
+.ss-container{
+  max-width:1000px;
+  position: relative;
+  margin: auto;
+}
+/*Caption Text*/
+.text{
+  color: #f2f2f2;
+  font-size: 15px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+/*Number rtext (1/3 etc)*/
+.numbertext{
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+/*the dots/bullets/indicators */
+.dot{
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+/*Fading animation*/
+.fade{
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.6s;
+  animation-name: fade;
+  animation-duration: 1.6s;
+}
+@-webkit-keyframes fade{
+  from {opacity: .4}
+  to{opacity: 1}
+}
+@keyframes fade {
+  from {opacity: .4}
+  to{opacity: 1}
+}
+/* On smaller screens decrease text size*/
+
+@media only screen and (max-width: 300px) {
+  .text{font-size: 11px}
+}
+/*-------------------------------------------------------------------------------*/
+/*making newsbox background blur*/
+div.newsbox {
+  position:relative;
+}
+div.newsbox:before{
+  content:'';
+  position:absolute;
+  z-index:-1;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
+  background:url(bg27.jpg) fixed center;
+  filter:blur(8px);
+  background-size:100vw auto;
+  /* makup ? */
+  box-shadow:inset 0 0 0 50vw rgba(255,255,255,0.2)
+}
+below-section{
+	margin-top: 30px;
+	top: 30px;
+}
+/*-------------------------footer section short----------------------------*/
+
+/*-------------------------contact us part----------------------------*/
+* {
+  box-sizing: border-box;
+}
+/* Style inputs */
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  cursor: pointer;
+}
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+/* Style the container/contact section */
+.container01 {
+  border-radius: 5px;
+  padding: 10px;
+margin-top:50px;
+}
+/* making blur this div background*/
+.container01 {
+  border:solid ;
+  padding:6vw ;
+  position:relative;
+}
+.container01:before{
+  content:'';
+  position:absolute;
+  z-index:-1;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
+  background:url(bg10.jpg) fixed center;
+  filter:blur(10px);
+  background-size:100vw auto;
+  /* makup ? */
+  box-shadow:inset 0 0 0 50vw rgba(255,255,255,0.2)
+}
+/* Create two columns that float next to eachother */
+.column {
+  float: left;
+  width: 50%;
+  margin-top: 6px;
+  padding: 20px;
+}
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack
+ on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+#reghead{
+	color: rgb(0,0,100);
+	background-color: lime;
+	margin: 3px;
+	padding: 5px;
+	border: 2px solid red;
+}
+/*registration  part*/
+/*add full-width input fields*/
+
+    input[type=text],
+
+    input[type=password] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 2px solid #ccc;
+        box-sizing: border-box;
+    }
+    /* set a style for all buttons*/
+	/*-------------------------reg log coloured animation buttons----------------------------*/
+.column4 .btnr{
+  background: none;
+  border: 2px solid #ff6000;
+  font-family: "montserrat",sans-serif;
+  text-transform: uppercase;
+  padding: 12px 20px;
+  min-width: 90px;
+  margin: 10px;
+  cursor: pointer;
+  transition: color 0.4s linear;
+  position: relative;
+}
+.column4 .btnr:hover{
+  color: #fff;
+}
+.column4 .btnr::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #ff6000;
+  z-index: -1;
+  transition: transform 0.5s;
+  transform-origin: 0 0;
+  transition-timing-function: cubic-bezier(0.5,1.6,0.4,0.7);
+}
+.column4 .btn1::before{
+  transform: scaleX(0);
+}
+.column4 .btn2::before{
+  transform: scaleY(0);
+}
+.column4 .btn1:hover::before{
+  transform: scaleX(1);
+}
+.column4 .btn2:hover::before{
+  transform: scaleY(1);
+}
+    /*set styles for the cancel button*/
+ .modal1  .cancelbtn {
+        padding: 14px 20px;
+        background-color: #FF2E00;
+    }	
+	 .modal1  .signupbtn {
+        padding: 14px 20px;
+        background-color: green;
+    }
+    /*float cancel and signup buttons and add an equal width*/
+  .modal1 .cancelbtn,
+
+  .modal1 .signupbtn {
+        float: left;
+        width: 50%
+    }
+    /*add padding to container elements*/
+  .modal1  .container1 {
+        padding: 16px;
+    }
+    /*define the modal’s background*/
+    .modal1 {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        padding-top: 60px;
+    }
+    /*define the modal-content background*/
+    .modal-content1 {
+        margin: 5% auto 15% auto;
+        border: 1px solid #888;
+        width: 80%;
+    }	
+	/* making blur this div background*/
+.modal-content1 {
+  border: all;
+  padding:6vw ;
+  position:relative;
+}
+.modal-content1:before{
+  content:'';
+  position:absolute;
+  z-index:-1;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
+  background:url(bg1.jpg) fixed center;
+  filter:blur(10px);
+  background-size:100vw auto;
+  /* makup ? */
+  box-shadow:inset 0 0 0 50vw rgba(255,255,255,0.2)
+}
+    /*define the close button*/
+ .modal1 .close01{
+        position: absolute;
+        right: 35px;
+        top: 15px;
+        color: #000;
+        font-size: 40px;
+        font-weight: bold;
+    }
+    /*define the close hover and focus effects*/
+   .modal1 .close:hover,
+
+   .modal1 .close:focus {
+        color: cyan;
+        cursor: pointer;
+    }
+    .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+    @media screen and (max-width: 300px) {
+
+   .modal1     .cancelbtn,
+
+    .modal1    .signupbtn {
+            width: 100%;
+        }
+    }
+/*login part*/
+/*add full-width input fields*/
+
+    input[type=text],
+
+    input[type=password] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 2px solid #ccc;
+        box-sizing: border-box;
+    }
+    /* set a style for all buttons*/
+    /*set styles for the cancel button*/
+ .modal2 .cancelbtn2 {
+        padding: 14px 20px;
+        background-color: #FF2E00;
+    }	
+	    /*set styles for the cancel button*/
+ .modal2 .loginbtn2 {
+        padding: 14px 20px;
+        background-color: green;
+    }
+    /*float cancel and signup buttons and add an equal width*/
+    .modal2 .cancelbtn2,
+
+    .modal2 .loginbtn2 {
+        float: left;
+        width: 50%
+    }
+    /*add padding to container elements*/
+    .container2 {
+        padding: 16px;
+    }
+    /*define the modal’s background*/
+    .modal2 {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+        padding-top: 60px;
+    }
+    /*define the modal-content background*/
+    .modal-content2 {
+        background-color: #fefefe;
+        margin: 5% auto 15% auto;
+        border: 1px solid #888;
+        width: 80%;
+    }
+    /*define the close button*/
+   .modal2 .close {
+        position: absolute;
+        right: 35px;
+        top: 15px;
+        color: #000;
+        font-size: 40px;
+        font-weight: bold;
+    }
+    /*define the close hover and focus effects*/
+    .close:hover,
+
+    .close:focus {
+        color: cyan;
+        cursor: pointer;
+    }
+    .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+    @media screen and (max-width: 300px) {
+
+ .modal2       .cancelbtn2,
+
+ .modal2       .loginbtn2 {
+            width: 100%;
+        }
+    }
+/*    new two divs    */
+* {
+  box-sizing: border-box;
+}
+/* Style the container/contact section */
+.container4 {
+  border:solid ;
+  padding:6vw ;
+  position:relative;
+}
+.container4:before{
+  content:'';
+  position:absolute;
+  z-index:-1;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
+  background:url(img4.jpg) fixed center;
+  filter:blur(4px);
+  background-size:100vw auto;
+  /* makup ? */
+  box-shadow:inset 0 0 0 50vw rgba(255,255,255,0.2)
+}
+.container4 {
+  border-radius: 8px;
+  padding: 10px;
+  margin-top:50px; 
+  background-size:cover; 
+}
+/* Create two columns that float next to eachother */
+.column4 {
+	border-radius: 7px;
+  float: left;
+  width: 50%;
+  margin-top: 6px;
+  padding: 20px;
+}
+.row4{
+
+}
+.innerdiv{
+  border-radius: 7px;
+  display: inline-block;
+  margin: 0 20%;
+
+	border-radius: 7px;
+  float: left;
+  width: 50%;
+  margin-top: 6px;
+  padding: 20px;  
+}
+h2{
+  color: red;
+  font-style: italic;
+  font-size: 28px;
+}
+h1{
+	  font-style: italic;
+  font-size: 28px;
+
+}
+/* Clear floats after the columns */
+.row4:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column4 {
+    width: 100%;
+    border: 3px solid black;
+  }
+}
+/*   cards folder section    */
+.containerc
+{
+    max-width: 1000px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    transition: 0.5s;
+    margin-left: 10%;
+	border-radius: 7px;
+}
+.container:hover .card
+{
+    filter: blur(5px);
+    transform: scale(.7);
+}
+.containerc .cardc
+{
+    position: relative;
+    width: 250px;
+    height: 300px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+   border-radius: 7px;
+}
+.containerc .cardc:hover
+{
+    filter: blur(0px);
+    transform: scale(1);
+}
+.containerc .cardc:before
+{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    z-index: 0;
+    transition: 0.5s;
+	border-radius: 7px;
+}
+.containerc .cardc:hover:before
+{
+    border-radius: 7px;
+    transform: scaleY(1.15);
+    /*  box-shadow: 0 5px 15px rgba(0,0,0,.2);  */	
+	  content:'';
+  position:absolute;
+  z-index:-1;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
+  background:url(bg17.jpg) fixed center;
+  filter:blur(4px);
+  background-size:100vw auto;
+  /* makup ? */
+  box-shadow:inset 0 0 0 50vw rgba(255,255,255,0.2)  
+}
+.containerc .cardc:after
+{
+    content: '';
+	border-radius: 7px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    transition: 0.5s;
+    background: rgba(255,255,255,.3);
+    z-index: 0;
+}
+.containerc .cardc:hover:after
+{
+    transform: scaleY(1.15);
+}
+.containerc .cardc:hover
+{
+    z-index: 0;
+}
+.containerc .cardc .contentc
+{
+    text-align: center;
+    z-index: 0;
+    padding: 0 20px;
+    transition: 0.5s;
+}
+.containerc .cardc:hover .contentc
+{
+    color: #fff;
+}
+.containerc .cardc .contentc h2
+{
+    font-size: 3em;
+}
+.containerc .cardc .contentc p
+{
+    font-size: 0.9em;
+}
+.containerc .cardc .contentc a
+{
+    display: inline-block;
+    margin-top: 15px;
+    padding: 5px 10px;
+    background: #262626;
+    color: #fff;
+    text-decoration: none;
+}
+.containerc .cardc:hover .contentc a
+{
+    background: #2196F3;
+}
+/*  new pictures container hover use circle   */
+.containerpic
+{
+	position: relative;
+	width: 1200px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+  margin-left: 5%;
+}
+.containerpic .boxpic
+{
+	position: relative;
+	width: 280px;
+	height: 400px;
+	margin: 20px 0;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+.containerpic .boxpic .imgBxpic
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	/*  background: #000;   */
+	clip-path: circle(400px at center 100px);
+	transition: 0.5s;
+	transition-delay: 0.5s;
+}
+.containerpic .boxpic:hover .imgBxpic
+{
+	clip-path: circle(80px at center 100px);
+	transition-delay: 0s;
+}
+.containerpic .boxpic .imgBxpic img
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.containerpic .boxpic .contentpic
+{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 55%;
+	padding: 20px;
+	box-sizing: border-box;
+	text-align: center;
+}
+.containerpic .boxpic .contentpic h2
+{
+	margin: 0;
+	padding: 0;
+}
+.containerpic .boxpic .contentpic a
+{
+	text-decoration: none;
+	background: #000;
+	color: #fff;
+	padding: 5px;
+	display: inline-block;
+}
+.containerpic .boxpic .contentpic h2,
+.containerpic .boxpic .contentpic p,
+.containerpic .boxpic .contentpic a
+{
+	opacity: 0;
+	transition: 0.5s;
+	transform: translateY(20px);
+	font-size:18px;
+}
+.containerpic .boxpic:hover .contentpic h2
+{
+	opacity: 1;
+	transform: translateY(0);
+	transition-delay: 0.5s
+}
+.containerpic .boxpic:hover .contentpic p
+{
+	opacity: 1;
+	transform: translateY(0);
+	transition-delay: 0.7s
+	font-size: 18px;
+}
+.containerpic .boxpic:hover .contentpic a
+{
+	opacity: 1;
+	transform: translateY(0);
+	transition-delay: 0.9s
+	
+}
+                     					  
+
+/*-------------------------modded card folder section----------------------------*/
+.responsive01 .gallery01 {
+	position: relative;
+	width: 280px;
+	height: 400px;
+	margin: 20px 0;
+	box-sizing: border-box;
+	overflow: hidden;	
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+}
+.responsive01 .gallery01 .imgBxpic01
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	/*  background: #000;   */
+	clip-path: circle(400px at center 100px);
+	transition: 0.5s;
+	transition-delay: 0.5s;
+}
+.responsive01 .gallery01:hover .imgBxpic01
+{
+	clip-path: circle(80px at center 100px);
+	transition-delay: 0s;
+}
+.responsive01 .gallery01 .imgBxpic01 img
+{
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.responsive01 .gallery01 .desc01 {
+	position: absolute;	
+	bottom: 0;
+	width: 100%;
+	height: 55%;
+	padding: 20px;
+	box-sizing: border-box;
+	text-align: center;
+}
+.responsive01 .gallery01 .desc01 h2{
+		margin: 0;
+	padding: 0;
+}
+.responsive01 .gallery01 .desc01 a{
+	text-decoration: none;
+	background: #2196F3;
+	color: #fff;
+	padding: 5px;
+	display: inline-block;
+}
+
+.responsive01 .gallery01 .desc01 h2,
+.responsive01 .gallery01 .desc01 p,
+.responsive01 .gallery01 .desc01 a
+{
+	opacity: 0;
+	transition: 0.5s;
+	transform: translateY(20px);
+	font-size:18px;
+}
+.responsive01 .gallery01:hover .desc01 h2
+{
+	opacity: 1;
+	transform: translateY(0);
+	transition-delay: 0.5s
+}
+.responsive01 .gallery01:hover .desc01 p
+{
+	opacity: 1;
+	transform: translateY(0);
+	transition-delay: 0.7s
+	font-size: 18px;
+}
+.responsive01 .gallery01:hover .desc01 a
+{
+	opacity: 1;
+	transform: translateY(0);
+	transition-delay: 0.9s
+
+}
+
+.responsive01 .gallery01 .desc01 a:hover{
+	text-decoration: none;
+	background: #cyan;
+	color: #fff;
+	padding: 5px;
+	display: inline-block;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+.responsive01 {
+  padding: 0 6px;
+  float: left;
+  width: 24.99999%;
+  position: relative;
+position: relative;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    transition: 0.5s;
+}
+
+@media only screen and (max-width: 700px) {
+  .responsive01 {
+    width: 49.99999%;
+    margin: 6px 0;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .responsive01 {
+    width: 100%;
+  }
+}
+.clearfix01:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/*-------------------------styling logo background----------------------------*/
+.mainlogo {
+  padding:6vw ;
+  position:relative;
+}
+.mainlogo:before{
+  content:'';
+  position:absolute;
+  z-index:-1;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
+  background:url(bg20.jpg) fixed center;
+  filter:blur(4px);
+  background-size:100vw auto;
+  /* makup ? */
+  box-shadow:inset 0 0 0 50vw rgba(255,255,255,0.2)
+}
+/*colourfull button*/
+.colbtn a
+{
+  position: absolute;
+  
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 300px;
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+  color: #fff;
+  font-size: 24px;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-family: sans-serif;
+  box-sizing: border-box;
+  background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+  background-size: 400%;
+  border-radius: 30px;
+}
+.colbtn a:hover
+{
+  animation: animate 8s linear infinite;
+}
+@keyframes animate
+ {
+  0%
+  {
+    background-position: 0%;
+  }
+  100%
+  {
+    background-position: 400%;
+  }
+}
+.colbtn a::before{
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  z-index: -1;
+  background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+  background-size: 400%;
+  border-radius: 40px;
+  opacity: 0;
+  transition: 0.5s;
+}
+.colbtn a:hover:before
+{
+  filter: blur(20px);
+  opacity: 1;
+  animation: animate 8s linear infinite;
+}
+/*smooth scrolling effects*/
+html{
+	scroll-behavior: smooth;
+}
+/*----------------searchbox---------------------- */
+
+/* Style inputs */
+#mysearch, input[type=search], select, textarea {
+
+width:100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  resize: vertical;
+  border-radius: 20px;
+margin-left: 100;
+
+  box-shadow:inset 0 0 0 50vw rgba(255,255,255,0.2)
+}
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px;
+}
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack
+ on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  #mysearch, input[type=submit] {
+    width: 100%;
+
+  }
+}
+/*----------------making sticky--------*/
+
+div.sticky1 {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  padding: 50px;
+  font-size: 20px;
+  z-index:1;
+  float: left;
+  margin-left: 30px;
+}
+/*---------highlighting searched words--------*/
+.highlight {
+    background-color: #fff34d;
+    -moz-border-radius: 5px; /* FF1+ */
+    -webkit-border-radius: 5px; /* Saf3-4 */
+    border-radius: 5px; /* Opera 10.5, IE 9, Saf5, Chrome */
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7); /* FF3.5+ */
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7); /* Saf3.0+, Chrome */
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7); /* Opera 10.5+, IE 9.0 */
+}
+
+.highlight {
+    padding:1px 4px;
+    margin:0 -4px;
+}
+/*------------scrolltotoparrow------------------*/
+#back2Top {
+    width: 40px;
+    line-height: 40px;
+    overflow: hidden;
+    z-index: 1;
+    display: none;
+    cursor: pointer;
+    -moz-transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    transform: rotate(270deg);
+    position: fixed;
+    bottom: 50px;
+    right: 0;
+    background-color: #DDD;
+    color: #555;
+    text-align: center;
+    font-size: 30px;
+    text-decoration: none;
+}
+#back2Top:hover {
+    background-color: #DDF;
+    color: #000;
+}
+/* ------------------search box hilighter--------------------------*/
+#text-search {
+    -webkit-appearance: none;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    width: 24px;
+    padding: 0 10px;
+    height: 24px;
+    font-size: 14px;
+    color: #666;
+    line-height: 24px;
+    border: 0;
+    border-radius: 50px;
+    box-shadow: 0 0 0 1px rgba(0,150,200,.5), inset 0 2px 5px rgba(0,100,150,.3), 0 2px 0 rgba(255,255,255,.6);
+    position: relative;
+    z-index: 5;
+    -webkit-transition: .3s ease;
+    -moz-transition: .3s ease;
+}
+
+#text-search:focus {
+    outline: none;
+    width: 180px;
+}
+
+p.s {
+    z-index: 4;
+    position: relative;
+    padding: 5px;
+    line-height: 0;
+    border-radius: 100px;
+    background: #b9ecfe;
+    background-image: -webkit-linear-gradient(#dbf6ff,#b9ecfe);
+    background-image: -moz-linear-gradient(#dbf6ff,#b9ecfe);
+    display: inline-block;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 2px 5px rgba(0,100,150,.4);
+}
+
+p.s:hover {
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 2px 3px 2px rgba(100,200,255,.5);
+}
+
+p.s:after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 5px;
+    height: 20px;
+    background: #b9ecfe;
+    bottom: -10px;
+    right: -3px;
+    border-radius: 0 0 5px 5px;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    box-shadow: inset 0 -1px 0 rgbA(255,255,255,.6), -2px 2px 2px rgba(0,100,150,.4);
+}
+
+p.s:hover:after {
+    box-shadow: inset 0 -1px 0 rgba(255,255,255,.6), -2px 2px 2px 1px rgba(100,200,255,.5);
+}
